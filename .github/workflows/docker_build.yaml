@@ -24,4 +24,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: gamako/flutter-build-android:latest
+          tags: |
+            gamako/flutter-build-android:latest
+            gamako/flutter-build-android:2.10.3
