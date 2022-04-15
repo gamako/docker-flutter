@@ -12,7 +12,8 @@ RUN apk --no-cache add gradle && \
 FROM alvrme/alpine-android-base:jdk11 AS flutter
 
 RUN apk add --no-cache xz
-ARG flutter_sdk=flutter_linux_2.10.1-stable.tar.xz
+ENV FLUTTER_VERSION 2.10.2
+ARG flutter_sdk=flutter_linux_${FLUTTER_VERSION}-stable.tar.xz
 
 RUN cd /opt \
     && curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/${flutter_sdk} \
