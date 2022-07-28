@@ -2,8 +2,8 @@ FROM alvrme/alpine-android-base:jdk11 AS gradle_builder
 
 RUN apk --no-cache add gradle && \
     cd /tmp && \
-    gradle --no-daemon wrapper --gradle-version  7.0.2 --distribution-type all && \
     touch settings.gradle && \
+    gradle --no-daemon wrapper --gradle-version  7.0.2 --distribution-type all && \
     ./gradlew wrapper --no-daemon && \
     rm -rf .gradle gradle  gradlew  gradlew.bat settings.gradle && \
     cd .. && \
