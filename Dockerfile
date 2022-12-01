@@ -3,7 +3,7 @@ FROM alvrme/alpine-android-base:jdk11 AS gradle_builder
 RUN apk --no-cache add gradle && \
     cd /tmp && \
     touch settings.gradle && \
-    gradle --no-daemon wrapper --gradle-version  7.0.2 --distribution-type all && \
+    gradle --no-daemon wrapper --gradle-version  7.4 --distribution-type all && \
     ./gradlew wrapper --no-daemon && \
     rm -rf .gradle gradle  gradlew  gradlew.bat settings.gradle && \
     cd .. && \
@@ -12,7 +12,7 @@ RUN apk --no-cache add gradle && \
 FROM alvrme/alpine-android-base:jdk11 AS flutter
 
 RUN apk add --no-cache xz
-ENV FLUTTER_VERSION 3.0.5
+ENV FLUTTER_VERSION 3.3.9
 ARG flutter_sdk=flutter_linux_${FLUTTER_VERSION}-stable.tar.xz
 
 RUN cd /opt \
@@ -24,16 +24,14 @@ FROM alvrme/alpine-android-base:jdk11
 
 LABEL maintainer="gamako@gmail.com"
 
-ENV BUILD_TOOLS 30.0.2
+ENV BUILD_TOOLS 33.0.1
 ENV PATH $PATH:${ANDROID_SDK_ROOT}/build-tools/${BUILD_TOOLS}
 
-RUN sdkmanager \
+RUN yes | sdkmanager \
     --sdk_root="${ANDROID_SDK_ROOT}" \
     --install \
         "build-tools;${BUILD_TOOLS}" \
-        "platforms;android-29" \
-        "platforms;android-30" \
-        "platforms;android-31" \
+        "platforms;android-33" \
     && sdkmanager --sdk_root="${ANDROID_SDK_ROOT}" --uninstall emulator
 
 COPY --from=gradle_builder /root/.gradle /root/.gradle
