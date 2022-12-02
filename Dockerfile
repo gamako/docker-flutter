@@ -24,15 +24,16 @@ FROM alvrme/alpine-android-base:jdk11
 
 LABEL maintainer="gamako@gmail.com"
 
-ENV BUILD_TOOLS 33.0.1
+ENV BUILD_TOOLS 30.0.3
 ENV PATH $PATH:${ANDROID_SDK_ROOT}/build-tools/${BUILD_TOOLS}
 
 RUN yes | sdkmanager \
     --sdk_root="${ANDROID_SDK_ROOT}" \
     --install \
         "build-tools;${BUILD_TOOLS}" \
-        "platforms;android-33" \
-    && sdkmanager --sdk_root="${ANDROID_SDK_ROOT}" --uninstall emulator
+        "platforms;android-31" \
+        "platforms;android-32" \
+        "platforms;android-33"
 
 COPY --from=gradle_builder /root/.gradle /root/.gradle
 COPY --from=flutter /opt/flutter /opt/flutter
