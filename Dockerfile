@@ -33,9 +33,11 @@ RUN yes | sdkmanager \
         "build-tools;${BUILD_TOOLS}" \
         "platforms;android-31" \
         "platforms;android-32" \
-        "platforms;android-33"
+        "platforms;android-33" \
+        "patcher;v4"
 
 COPY --from=gradle_builder /root/.gradle /root/.gradle
 COPY --from=flutter /opt/flutter /opt/flutter
 ENV PATH=/opt/flutter/bin:${PATH}
 RUN flutter config --no-analytics
+RUN git config --global --add safe.directory /opt/flutter
