@@ -1,4 +1,4 @@
-FROM alvrme/alpine-android-base:jdk11 AS gradle_builder
+FROM alvrme/alpine-android-base:jdk17 AS gradle_builder
 
 RUN apk --no-cache add gradle && \
     cd /tmp && \
@@ -9,7 +9,7 @@ RUN apk --no-cache add gradle && \
     cd .. && \
     apk del gradle
 
-FROM alvrme/alpine-android-base:jdk11 AS flutter
+FROM alvrme/alpine-android-base:jdk17 AS flutter
 
 RUN apk add --no-cache xz
 ENV FLUTTER_VERSION=3.24.0
@@ -20,7 +20,7 @@ RUN cd /opt \
     && tar xf ${flutter_sdk} \
     && rm ${flutter_sdk}
 
-FROM alvrme/alpine-android-base:jdk11
+FROM alvrme/alpine-android-base:jdk17
 
 LABEL maintainer="gamako@gmail.com"
 
