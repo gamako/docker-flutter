@@ -12,7 +12,7 @@ RUN apk --no-cache add gradle && \
 FROM alvrme/alpine-android-base:jdk17 AS flutter
 
 RUN apk add --no-cache xz
-ENV FLUTTER_VERSION=3.24.0
+ENV FLUTTER_VERSION=3.24.3
 ARG flutter_sdk=flutter_linux_${FLUTTER_VERSION}-stable.tar.xz
 
 RUN cd /opt \
